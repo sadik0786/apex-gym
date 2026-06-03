@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { siteConfig } from "@/config/siteConfig";
 
-export default function Hero() {
+export default function HeroSection() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -46,6 +47,8 @@ export default function Hero() {
     }
   };
 
+  const { hero } = siteConfig;
+
   return (
     <section
       id="home"
@@ -55,7 +58,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-105"
         style={{
-          backgroundImage: "url('/images/hero-bg.png')",
+          backgroundImage: `url('${hero.backgroundImage}')`,
         }}
       />
       {/* Dark Radial and Linear Overlays to blend with the rest of the dark site */}
@@ -79,7 +82,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-neon/30 text-neon text-xs font-semibold uppercase tracking-widest mb-6 shadow-[0_0_15px_rgba(0,255,133,0.1)]"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-neon animate-ping" />
-            Apex Luxury Fitness Club
+            {hero.badge}
           </motion.div>
 
           {/* Heading */}
@@ -87,8 +90,8 @@ export default function Hero() {
             variants={itemVariants}
             className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mb-6 max-w-4xl leading-[1.1]"
           >
-            Train Hard.<br />
-            Become <span className="text-neon text-glow-strong">Unstoppable</span>.
+            {hero.headingLine1}<br />
+            {hero.headingLine2} <span className="text-neon text-glow-strong">{hero.highlightedWord}</span>.
           </motion.h1>
 
           {/* Subheading */}
@@ -96,7 +99,7 @@ export default function Hero() {
             variants={itemVariants}
             className="text-gray-300 text-sm md:text-base lg:text-lg font-light max-w-xl mb-10 leading-relaxed"
           >
-            Premium fitness experience designed to push your limits. Unlock your true physical potential with elite coaching and state-of-the-art facilities.
+            {hero.subheading}
           </motion.p>
 
           {/* Action Buttons */}
@@ -108,14 +111,14 @@ export default function Hero() {
               onClick={() => handleScrollTo("membership")}
               className="glow-btn w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-neon text-black font-bold uppercase text-sm tracking-wider px-8 py-5 rounded-full transition-all duration-300 active:scale-95 shadow-[0_0_30px_rgba(0,255,133,0.3)] hover:shadow-[0_0_40px_rgba(0,255,133,0.6)] cursor-pointer"
             >
-              Join Now <ArrowRight size={18} className="stroke-[3]" />
+              {hero.primaryButtonText} <ArrowRight size={18} className="stroke-[3]" />
             </button>
 
             <button
               onClick={() => handleScrollTo("membership")}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-transparent hover:bg-white/5 border border-white/20 hover:border-neon text-white font-bold uppercase text-sm tracking-wider px-8 py-5 rounded-full transition-all duration-300 active:scale-95 cursor-pointer"
             >
-              View Plans
+              {hero.secondaryButtonText}
             </button>
           </motion.div>
         </motion.div>

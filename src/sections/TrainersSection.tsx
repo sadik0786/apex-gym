@@ -3,47 +3,11 @@
 import { motion } from "framer-motion";
 import { Award, Clock } from "lucide-react";
 import Image from "next/image";
+import { siteConfig } from "@/config/siteConfig";
 
-const trainers = [
-  {
-    name: "Marcus Vance",
-    specialty: "Strength & Conditioning Coach",
-    exp: "8 Years Exp",
-    certs: "CSCS, NASM-PES",
-    image: "/images/trainer-1.png",
-    socials: {
-      instagram: "https://instagram.com",
-      twitter: "https://twitter.com",
-      linkedin: "https://linkedin.com",
-    },
-  },
-  {
-    name: "Elena Rostova",
-    specialty: "HIIT & Fat Loss Specialist",
-    exp: "6 Years Exp",
-    certs: "NASM-CPT, FNS",
-    image: "/images/trainer-2.png",
-    socials: {
-      instagram: "https://instagram.com",
-      twitter: "https://twitter.com",
-      linkedin: "https://linkedin.com",
-    },
-  },
-  {
-    name: "Darian Cole",
-    specialty: "Calisthenics & Mobility expert",
-    exp: "7 Years Exp",
-    certs: "CSCC, FRCMS",
-    image: "/images/trainer-3.png",
-    socials: {
-      instagram: "https://instagram.com",
-      twitter: "https://twitter.com",
-      linkedin: "https://linkedin.com",
-    },
-  },
-];
+export default function TrainersSection() {
+  const { trainers } = siteConfig;
 
-export default function Trainers() {
   return (
     <section id="trainers" className="relative z-10 scroll-mt-24 py-20 md:py-28 bg-black overflow-hidden">
       {/* Decorative neon ambient gradients */}
@@ -91,7 +55,7 @@ export default function Trainers() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
-              key={trainer.name}
+              key={trainer.id}
               className="group relative rounded-3xl overflow-hidden glass border border-dark-border aspect-[3/4] flex flex-col justify-end p-6 md:p-8"
             >
               {/* Trainer Image */}
@@ -115,7 +79,7 @@ export default function Trainers() {
                 
                 {/* Certificates badge (Fade-in on Hover) */}
                 <span className="inline-block text-[10px] text-neon border border-neon/30 bg-neon/10 font-bold uppercase tracking-wider px-2 py-0.5 rounded mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                  {trainer.certs}
+                  Certified Pro
                 </span>
 
                 {/* Trainer Name */}
@@ -125,93 +89,73 @@ export default function Trainers() {
 
                 {/* Specialty */}
                 <p className="text-gray-300 text-sm font-medium mb-3 group-hover:text-white transition-colors duration-300">
-                  {trainer.specialty}
+                  {trainer.role}
                 </p>
 
                 {/* Additional Stats Container (Slides up on Hover) */}
                 <div className="flex gap-4 mb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75">
                   <div className="flex items-center gap-1.5 text-xs text-gray-400">
                     <Clock size={12} className="text-neon" />
-                    <span>{trainer.exp}</span>
+                    <span>Experience</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-xs text-gray-400">
                     <Award size={12} className="text-neon" />
-                    <span>Certified Pro</span>
+                    <span>Elite</span>
                   </div>
                 </div>
 
                 {/* Social icons */}
                 <div className="flex items-center gap-4 border-t border-white/10 pt-4 mt-1 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-150">
-                  <a
-                    href={trainer.socials.instagram}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-8 h-8 rounded-full bg-white/5 hover:bg-neon hover:text-black flex items-center justify-center text-white transition-all duration-300"
-                    aria-label={`${trainer.name} Instagram`}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-instagram"
+                  {trainer.instagram && (
+                    <a
+                      href={trainer.instagram}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-8 h-8 rounded-full bg-white/5 hover:bg-neon hover:text-black flex items-center justify-center text-white transition-all duration-300"
+                      aria-label={`${trainer.name} Instagram`}
                     >
-                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                    </svg>
-                  </a>
-                  <a
-                    href={trainer.socials.twitter}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-8 h-8 rounded-full bg-white/5 hover:bg-neon hover:text-black flex items-center justify-center text-white transition-all duration-300"
-                    aria-label={`${trainer.name} Twitter`}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-twitter"
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-instagram"
+                      >
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                      </svg>
+                    </a>
+                  )}
+                  {trainer.twitter && (
+                    <a
+                      href={trainer.twitter}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-8 h-8 rounded-full bg-white/5 hover:bg-neon hover:text-black flex items-center justify-center text-white transition-all duration-300"
+                      aria-label={`${trainer.name} Twitter`}
                     >
-                      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                    </svg>
-                  </a>
-                  <a
-                    href={trainer.socials.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-8 h-8 rounded-full bg-white/5 hover:bg-neon hover:text-black flex items-center justify-center text-white transition-all duration-300"
-                    aria-label={`${trainer.name} LinkedIn`}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-linkedin"
-                    >
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                      <rect width="4" height="12" x="2" y="9" />
-                      <circle cx="4" cy="4" r="2" />
-                    </svg>
-                  </a>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-twitter"
+                      >
+                        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+                      </svg>
+                    </a>
+                  )}
                 </div>
 
               </div>

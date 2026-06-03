@@ -3,46 +3,23 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
+import { siteConfig } from "@/config/siteConfig";
 
-const testimonials = [
-  {
-    name: "Sarah Jenkins",
-    role: "Corporate Executive",
-    review: "The training philosophy at Apex Gym completely changed my approach to physical health. In just 6 months, I've broken all my personal records, shed 34 lbs of fat, and unlocked a level of energy I didn't think was possible. The coaches are absolute geniuses!",
-    rating: 5,
-    initials: "SJ",
-  },
-  {
-    name: "John Miller",
-    role: "Professional Athlete",
-    review: "Apex is a premium athletic club in every sense. The equipment is state-of-the-art, the coaches are exceptionally knowledgeable in sports science, and the environment pushes you to execute at 100%. Hands down the best gym in the country.",
-    rating: 5,
-    initials: "JM",
-  },
-  {
-    name: "David Kross",
-    role: "Tech Entrepreneur",
-    review: "As a founder with a hectic schedule, the 24/7 keycard access and the custom mobile nutrition tracking app are absolute game-changers. I can fit my workouts in at midnight or 5 AM, knowing the facilities are always pristine and secure. A premium experience.",
-    rating: 5,
-    initials: "DK",
-  },
-];
-
-export default function Testimonials() {
+export default function TestimonialsSection() {
+  const { testimonials } = siteConfig;
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+  const [direction, setDirection] = useState(0);
 
   const handleNext = useCallback(() => {
     setDirection(1);
     setCurrent((prev) => (prev + 1) % testimonials.length);
-  }, []);
+  }, [testimonials.length]);
 
   const handlePrev = useCallback(() => {
     setDirection(-1);
     setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  }, []);
+  }, [testimonials.length]);
 
-  // Autoplay functionality
   useEffect(() => {
     const timer = setInterval(() => {
       handleNext();
@@ -64,6 +41,8 @@ export default function Testimonials() {
       opacity: 0,
     }),
   };
+
+  if (!testimonials || testimonials.length === 0) return null;
 
   return (
     <section id="testimonials" className="relative z-10 scroll-mt-24 py-20 md:py-28 bg-dark-bg overflow-hidden border-t border-dark-border">
@@ -119,7 +98,7 @@ export default function Testimonials() {
                 {/* Left Profile Frame */}
                 <div className="flex flex-col items-center shrink-0">
                   <div className="w-20 h-20 rounded-full bg-dark-bg border-2 border-neon flex items-center justify-center text-white font-extrabold text-2xl tracking-wider shadow-[0_0_15px_rgba(0,255,133,0.3)] mb-4">
-                    {testimonials[current].initials}
+                    {testimonials[current].name.split(" ").map((n) => n[0]).join("")}
                   </div>
                   <h3 className="text-lg font-black uppercase tracking-wide text-white text-center">
                     {testimonials[current].name}
@@ -140,7 +119,7 @@ export default function Testimonials() {
                   
                   {/* Review Text */}
                   <blockquote className="text-gray-200 text-base md:text-lg font-light leading-relaxed italic mb-4">
-                    &ldquo;{testimonials[current].review}&rdquo;
+                    &ldquo;{testimonials[current].content}&rdquo;
                   </blockquote>
                 </div>
               </motion.div>

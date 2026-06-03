@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Trophy } from "lucide-react";
+import { siteConfig } from "@/config/siteConfig";
 
-export default function CTA() {
+export default function CTASection() {
+  const { cta } = siteConfig;
+
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -45,12 +48,12 @@ export default function CTA() {
           </div>
 
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mb-6 leading-tight">
-            Start Your Fitness<br className="hidden sm:inline" />
-            <span className="text-neon text-glow-strong">Journey Today</span>
+            {cta.headingLine1}<br className="hidden sm:inline" />
+            {cta.headingLine2} <span className="text-neon text-glow-strong">{cta.highlightedWord}</span>
           </h2>
 
           <p className="text-gray-300 text-sm md:text-base font-light max-w-xl mx-auto mb-10 leading-relaxed">
-            Stop waiting for &quot;tomorrow&quot;. Take command of your body, build championship physical endurance, and redefine what&apos;s possible with Apex.
+            {cta.subheading}
           </p>
 
           <div className="flex justify-center">
@@ -58,7 +61,7 @@ export default function CTA() {
               onClick={() => handleScrollTo("contact")}
               className="glow-btn inline-flex items-center gap-3 bg-neon text-black font-extrabold uppercase text-sm tracking-widest px-8 py-5 rounded-full hover:bg-white transition-all duration-300 active:scale-95 shadow-[0_0_25px_rgba(0,255,133,0.35)] cursor-pointer"
             >
-              Join Apex Gym <ArrowRight size={18} className="stroke-[3]" />
+              {cta.buttonText} <ArrowRight size={18} className="stroke-[3]" />
             </button>
           </div>
 

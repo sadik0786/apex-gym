@@ -1,16 +1,18 @@
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Stats from "@/components/Stats";
-import Programs from "@/components/Programs";
-import Trainers from "@/components/Trainers";
-import Membership from "@/components/Membership";
-import Transformation from "@/components/Transformation";
-import Testimonials from "@/components/Testimonials";
-import CTA from "@/components/CTA";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import Stats from "@/components/Stats";
+
+// New Config-Driven Sections
+import HeroSection from "@/sections/HeroSection";
+import ProgramsSection from "@/sections/ProgramsSection";
+import TrainersSection from "@/sections/TrainersSection";
+import MembershipSection from "@/sections/MembershipSection";
+import TransformationSection from "@/sections/TransformationSection";
+import TestimonialsSection from "@/sections/TestimonialsSection";
+import CTASection from "@/sections/CTASection";
+import ContactSection from "@/sections/ContactSection";
 
 export default function Home() {
   return (
@@ -32,31 +34,31 @@ export default function Home() {
         {/* Core Sections */}
         <main className="relative z-10">
           {/* 3. Hero Section */}
-          <Hero />
+          <HeroSection />
 
-          {/* 4. Stats Counters */}
+          {/* 4. Stats Counters (Generic) */}
           <Stats />
 
           {/* 5. Gym Programs */}
-          <Programs />
+          <ProgramsSection />
 
           {/* 6. Elite Coaches */}
-          <Trainers />
+          <TrainersSection />
 
           {/* 7. Membership Rates */}
-          <Membership />
+          <MembershipSection />
 
           {/* 8. Transformations before/after composite grid */}
-          <Transformation />
+          <TransformationSection />
 
           {/* 9. Client Testimonial Slider */}
-          <Testimonials />
+          <TestimonialsSection />
 
           {/* 10. Large CTA Banner */}
-          <CTA />
+          <CTASection />
 
           {/* 11. Custom Form & Dark Map Desk */}
-          <Contact />
+          <ContactSection />
         </main>
 
         {/* 12. Site Footnote Navigation */}

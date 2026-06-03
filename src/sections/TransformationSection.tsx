@@ -2,36 +2,14 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight, Trophy, TrendingUp, Calendar } from "lucide-react";
+import { Trophy, Calendar } from "lucide-react";
+import { siteConfig } from "@/config/siteConfig";
 
-const transformations = [
-  {
-    name: "Sarah Jenkins",
-    goal: "Fat Loss & Muscle Tone",
-    timeline: "6 Months",
-    stats: [
-      { label: "Weight", before: "168 lbs", after: "134 lbs" },
-      { label: "Body Fat", before: "29%", after: "14%" },
-      { label: "Energy Level", before: "Low", after: "Peak" },
-    ],
-    image: "/images/transform-1.png",
-    accent: "Fat Loss Winner",
-  },
-  {
-    name: "John Miller",
-    goal: "Lean Muscle Hypertrophy",
-    timeline: "12 Months",
-    stats: [
-      { label: "Weight", before: "155 lbs", after: "182 lbs" },
-      { label: "Muscle Mass", before: "Optimal", after: "Elite (+27 lbs)" },
-      { label: "Squat Max", before: "185 lbs", after: "315 lbs" },
-    ],
-    image: "/images/transform-2.png",
-    accent: "Strength Champion",
-  },
-];
+export default function TransformationSection() {
+  const { transformations } = siteConfig;
 
-export default function Transformation() {
+  if (!transformations || transformations.length === 0) return null;
+
   return (
     <section id="transformations" className="relative z-10 scroll-mt-24 py-20 md:py-28 bg-black overflow-hidden">
       {/* Background decorations */}
@@ -79,14 +57,14 @@ export default function Transformation() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
-              key={item.name}
+              key={item.id}
               className="glass-premium border border-dark-border rounded-3xl overflow-hidden group hover:border-neon/30 transition-colors duration-500"
             >
               {/* Image Frame */}
               <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-dark-border">
                 <Image
-                  src={item.image}
-                  alt={`${item.name} Transformation`}
+                  src={item.afterImage}
+                  alt={`${item.clientName} Transformation`}
                   fill
                   sizes="(max-w-7xl) 50vw, 100vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
@@ -101,12 +79,6 @@ export default function Transformation() {
                     After
                   </span>
                 </div>
-
-                <div className="absolute bottom-4 left-4">
-                  <span className="bg-neon/15 border border-neon/30 text-neon text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full backdrop-blur-sm">
-                    {item.accent}
-                  </span>
-                </div>
               </div>
 
               {/* Data & Metrics Frame */}
@@ -114,38 +86,15 @@ export default function Transformation() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                   <div>
                     <h3 className="text-2xl font-black uppercase text-white tracking-wide">
-                      {item.name}
+                      {item.clientName}
                     </h3>
-                    <p className="text-gray-400 text-xs font-light mt-0.5">
-                      Goal Achievement: <span className="text-white font-medium">{item.goal}</span>
-                    </p>
                   </div>
                   <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-dark-bg border border-dark-border shrink-0 self-start sm:self-auto">
                     <Calendar size={14} className="text-neon" />
                     <span className="text-xs font-bold uppercase tracking-wider text-neon">
-                      {item.timeline}
+                      {item.duration}
                     </span>
                   </div>
-                </div>
-
-                {/* Stats Comparisons */}
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  {item.stats.map((stat) => (
-                    <div key={stat.label} className="bg-dark-bg/60 p-4 rounded-2xl border border-dark-border/40 text-center">
-                      <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-2">
-                        {stat.label}
-                      </div>
-                      <div className="flex items-center justify-center gap-1.5 flex-wrap">
-                        <span className="text-xs text-gray-400 line-through font-light">
-                          {stat.before}
-                        </span>
-                        <ArrowRight size={10} className="text-neon" />
-                        <span className="text-sm text-neon font-extrabold tracking-wide text-glow">
-                          {stat.after}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
                 </div>
 
                 <div className="flex items-center gap-3 p-4 rounded-2xl bg-neon/[0.03] border border-neon/15">

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { siteConfig } from "@/config/siteConfig";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -18,6 +19,11 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+
+  // Split business name into two parts for styling
+  const nameParts = siteConfig.business.name.split(" ");
+  const firstName = nameParts[0] || "APEX";
+  const lastName = nameParts.slice(1).join(" ") || "GYM";
 
   // Track scroll position for navbar background transition
   useEffect(() => {
@@ -87,7 +93,7 @@ export default function Navbar() {
         {/* Logo */}
         <a href="#home" onClick={(e) => handleScrollTo(e, "#home")} className="flex items-center gap-2 group">
           <span className="font-black text-2xl tracking-wider uppercase text-white transition-all duration-300">
-            APEX<span className="text-neon text-glow transition-all duration-300 group-hover:text-white">GYM</span>
+            {firstName}<span className="text-neon text-glow transition-all duration-300 group-hover:text-white">{lastName}</span>
           </span>
           <div className="w-2 h-2 rounded-full bg-neon animate-pulse-glow" />
         </a>

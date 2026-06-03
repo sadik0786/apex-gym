@@ -1,9 +1,16 @@
 "use client";
 
-import { Dumbbell, MapPin, Mail, Phone } from "lucide-react";
+
+import { siteConfig } from "@/config/siteConfig";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { business, socialLinks, contact } = siteConfig;
+
+  // Split business name into two parts for styling
+  const nameParts = business.name.split(" ");
+  const firstName = nameParts[0] || "APEX";
+  const lastName = nameParts.slice(1).join(" ") || "GYM";
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -39,106 +46,59 @@ export default function Footer() {
           <div className="flex flex-col gap-6">
             <a href="#home" onClick={(e) => handleScrollTo(e, "#home")} className="flex items-center gap-2 self-start">
               <span className="font-black text-2xl tracking-wider uppercase text-white">
-                APEX<span className="text-neon text-glow">GYM</span>
+                {firstName}<span className="text-neon text-glow">{lastName}</span>
               </span>
               <div className="w-2 h-2 rounded-full bg-neon shadow-[0_0_10px_#00FF85]" />
             </a>
             <p className="text-gray-400 text-xs font-light leading-relaxed">
-              Apex Gym delivers a luxury fitness experience designed to break physical thresholds. Built for high-performance training with elite coaching and state-of-the-art machinery.
+              {business.name} delivers a luxury fitness experience designed to break physical thresholds. Built for high-performance training with elite coaching and state-of-the-art machinery.
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-4">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-white/5 border border-white/5 hover:border-neon hover:text-neon flex items-center justify-center text-gray-400 hover:scale-105 transition-all duration-300"
-                aria-label="Instagram link"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-instagram"
+              {socialLinks.instagram && (
+                <a
+                  href={socialLinks.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/5 hover:border-neon hover:text-neon flex items-center justify-center text-gray-400 hover:scale-105 transition-all duration-300"
+                  aria-label="Instagram link"
                 >
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                </svg>
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-white/5 border border-white/5 hover:border-neon hover:text-neon flex items-center justify-center text-gray-400 hover:scale-105 transition-all duration-300"
-                aria-label="Twitter link"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-twitter"
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
+                </a>
+              )}
+              {socialLinks.twitter && (
+                <a
+                  href={socialLinks.twitter}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/5 hover:border-neon hover:text-neon flex items-center justify-center text-gray-400 hover:scale-105 transition-all duration-300"
+                  aria-label="Twitter link"
                 >
-                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                </svg>
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-white/5 border border-white/5 hover:border-neon hover:text-neon flex items-center justify-center text-gray-400 hover:scale-105 transition-all duration-300"
-                aria-label="Facebook link"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-facebook"
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" /></svg>
+                </a>
+              )}
+              {socialLinks.facebook && (
+                <a
+                  href={socialLinks.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/5 hover:border-neon hover:text-neon flex items-center justify-center text-gray-400 hover:scale-105 transition-all duration-300"
+                  aria-label="Facebook link"
                 >
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                </svg>
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-white/5 border border-white/5 hover:border-neon hover:text-neon flex items-center justify-center text-gray-400 hover:scale-105 transition-all duration-300"
-                aria-label="Youtube link"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-youtube"
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
+                </a>
+              )}
+              {socialLinks.youtube && (
+                <a
+                  href={socialLinks.youtube}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/5 hover:border-neon hover:text-neon flex items-center justify-center text-gray-400 hover:scale-105 transition-all duration-300"
+                  aria-label="Youtube link"
                 >
-                  <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z" />
-                  <polygon points="10 15 15 12 10 9" />
-                </svg>
-              </a>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z" /><polygon points="10 15 15 12 10 9" /></svg>
+                </a>
+              )}
             </div>
           </div>
 
@@ -189,8 +149,8 @@ export default function Footer() {
                 <span className="text-white font-medium">8:00 AM - 8:00 PM</span>
               </li>
               <li className="flex flex-col gap-1 text-[11px] text-neon/80 font-bold bg-neon/5 border border-neon/10 p-2.5 rounded-lg mt-2">
-                <span>* Keycard Entry (Pro & Elite):</span>
-                <span className="text-white font-light text-[10px]">Uncapped 24/7/365 secure facility access</span>
+                <span>* Membership Perks:</span>
+                <span className="text-white font-light text-[10px]">{contact.businessHours}</span>
               </li>
             </ul>
           </div>
@@ -201,7 +161,7 @@ export default function Footer() {
               Timely Updates
             </h3>
             <p className="text-gray-400 text-xs font-light leading-relaxed">
-              Subscribe to the Apex athletic journal for science-backed workouts, meal guides, and early access VIP promotions.
+              Subscribe to the {business.name} athletic journal for science-backed workouts, meal guides, and early access VIP promotions.
             </p>
             <div className="relative flex">
               <input
@@ -225,7 +185,7 @@ export default function Footer() {
 
         {/* Footer Bottom */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-gray-500 font-light">
-          <p>&copy; {currentYear} Apex Gym. All rights reserved. Made for professional athletic performance.</p>
+          <p>&copy; {currentYear} {business.name}. All rights reserved. Made for professional athletic performance.</p>
           <div className="flex items-center gap-6">
             <a href="#home" className="hover:text-neon transition-colors">Privacy Policy</a>
             <a href="#home" className="hover:text-neon transition-colors">Terms of Service</a>

@@ -1,14 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageSquareText } from "lucide-react";
+import { siteConfig } from "@/config/siteConfig";
+import { generateWhatsAppLink } from "@/utils/contact";
 
 export default function WhatsAppButton() {
-  const whatsappNumber = "18005552739"; // Placeholder contact number
-  const initialMessage = encodeURIComponent(
-    "Hello Apex Gym! I am interested in joining. Can I get some information on the Pro membership plan?"
+  const { whatsapp } = siteConfig.contact;
+  const whatsappUrl = generateWhatsAppLink(
+    whatsapp,
+    `Hello ${siteConfig.business.name}! I am interested in joining.`
   );
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${initialMessage}`;
 
   return (
     <div className="fixed bottom-6 right-6 z-40">

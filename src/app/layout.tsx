@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { siteConfig } from "@/config/siteConfig";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -9,14 +10,15 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Apex Gym | Train Hard. Become Unstoppable.",
-  description: "Experience premium, state-of-the-art training facilities, elite level trainers, and high-performance membership plans at Apex Gym. Push your limits today.",
-  keywords: ["gym", "fitness", "personal training", "elite coaches", "luxury fitness", "weight training", "cardio", "fat loss", "Apex Gym"],
+  title: siteConfig.seo.title,
+  description: siteConfig.seo.description,
+  keywords: siteConfig.seo.keywords,
   openGraph: {
-    title: "Apex Gym | Train Hard. Become Unstoppable.",
-    description: "Premium fitness experience designed to push your limits. Join elite trainers and active members today.",
-    siteName: "Apex Gym",
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
+    siteName: siteConfig.business.name,
     type: "website",
+    images: [{ url: siteConfig.seo.ogImage }],
   },
 };
 
@@ -26,7 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" style={{
+      "--color-neon": siteConfig.theme.primary,
+      "--color-neon-dim": siteConfig.theme.secondary,
+      "--color-neon-glow": `${siteConfig.theme.primary}26`, // roughly 15% opacity
+    } as React.CSSProperties}>
       <body className={`${poppins.variable} font-sans antialiased bg-dark-bg text-white overflow-x-hidden w-full relative`}>
         {children}
       </body>

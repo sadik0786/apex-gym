@@ -3,8 +3,12 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Mail, MapPin, Send, CheckCircle2, Loader2 } from "lucide-react";
+import { siteConfig } from "@/config/siteConfig";
+import { generateWhatsAppLink, generateMailtoLink } from "@/utils/contact";
 
-export default function Contact() {
+export default function ContactSection() {
+  const { contact } = siteConfig;
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -102,7 +106,7 @@ export default function Contact() {
         {/* Core Layout Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Form Column - 5 Columns wide on desktop, spans full width on medium screens */}
+          {/* Form Column */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -243,7 +247,7 @@ export default function Contact() {
                     Message Transmitted
                   </h3>
                   <p className="text-gray-300 text-sm font-light max-w-sm leading-relaxed mb-8">
-                    Your details have been registered inside the Apex database. A certified trainer will contact you via email or phone within the next 12 hours.
+                    Your details have been registered inside the database. A certified trainer will contact you via email or phone within the next 12 hours.
                   </p>
                   <button
                     onClick={() => setIsSubmitted(false)}
@@ -256,7 +260,7 @@ export default function Contact() {
             </AnimatePresence>
           </motion.div>
 
-          {/* Details Column - 3 Columns wide on desktop, 1 column on medium screens */}
+          {/* Details Column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -266,7 +270,7 @@ export default function Contact() {
           >
             <div className="flex flex-col gap-4 h-full justify-between">
               <h3 className="text-lg font-black uppercase tracking-wide text-white mb-1">
-                Apex HQ Details
+                {siteConfig.business.name} HQ
               </h3>
               
               {/* Address */}
@@ -276,8 +280,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-[10px] uppercase font-extrabold tracking-widest text-gray-500 mb-0.5">Location</p>
-                  <p className="text-xs font-semibold text-white">742 Apex Way, Suite 100</p>
-                  <p className="text-[10px] font-light text-gray-400">Los Angeles, CA 90025</p>
+                  <p className="text-xs font-semibold text-white">{contact.address}</p>
                 </div>
               </div>
 
@@ -288,10 +291,9 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-[10px] uppercase font-extrabold tracking-widest text-gray-500 mb-0.5">Call Us</p>
-                  <a href="tel:+18005552739" className="text-xs font-bold text-white hover:text-neon transition-colors">
-                    +1 (800) 555-APEX
+                  <a href={`tel:${contact.phone.replace(/[^0-9+]/g, '')}`} className="text-xs font-bold text-white hover:text-neon transition-colors">
+                    {contact.phone}
                   </a>
-                  <p className="text-[10px] font-light text-gray-400">Toll-free, 24/7 hotline</p>
                 </div>
               </div>
 
@@ -302,10 +304,9 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-[10px] uppercase font-extrabold tracking-widest text-gray-500 mb-0.5">Write Us</p>
-                  <a href="mailto:join@apexgym.com" className="text-xs font-bold text-white hover:text-neon transition-colors">
-                    join@apexgym.com
+                  <a href={generateMailtoLink(contact.email)} className="text-xs font-bold text-white hover:text-neon transition-colors">
+                    {contact.email}
                   </a>
-                  <p className="text-[10px] font-light text-gray-400">Corporate & general inquiry</p>
                 </div>
               </div>
 
@@ -319,20 +320,19 @@ export default function Contact() {
                 <div>
                   <p className="text-[10px] uppercase font-extrabold tracking-widest text-gray-500 mb-0.5">WhatsApp Chat</p>
                   <a
-                    href="https://wa.me/18005552739?text=Hello%20Apex%20Gym!%20I%20am%20interested%20in%20joining."
+                    href={generateWhatsAppLink(contact.whatsapp, `Hello ${siteConfig.business.name}! I am interested in joining.`)}
                     target="_blank"
                     rel="noreferrer"
                     className="text-xs font-bold text-[#25D366] hover:text-white transition-colors flex items-center gap-1"
                   >
-                    +1 (800) 555-APEX <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
+                    Chat on WhatsApp <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
                   </a>
-                  <p className="text-[10px] font-light text-gray-400">Instantly chat with a coach</p>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Map Column - 4 Columns wide on desktop, 1 column on medium screens */}
+          {/* Map Column */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -341,8 +341,8 @@ export default function Contact() {
             className="md:col-span-1 lg:col-span-4 glass border border-dark-border rounded-3xl overflow-hidden min-h-[320px] relative shadow-[0_15px_30px_rgba(0,0,0,0.4)]"
           >
             <iframe
-              title="Apex Gym Google Map Embed"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.738872016599!2d-118.44524858478496!3d34.05063078060591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bc047e29b7df%3A0x915c6c06df9a1841!2sSanta%20Monica%20Blvd%2C%20Los%20Angeles%2C%20CA!5e0!3m2!1sen!2sus!4v1655000000000!5m2!1sen!2sus"
+              title={`${siteConfig.business.name} Google Map Embed`}
+              src={contact.googleMapLink}
               className="w-full h-full border-0 grayscale invert contrast-[1.25] opacity-75 rounded-3xl"
               allowFullScreen={false}
               loading="lazy"
